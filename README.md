@@ -64,4 +64,8 @@ Au premier démarrage sans identifiants enregistrés, l'ESP32 crée le point d'a
 4. Sur V2.3, confirmer l'adresse I²C, le câblage et l'extinction/réveil du rétroéclairage après trois minutes.
 5. Tester le redémarrage après panne Internet, le compteur quotidien et les journaux.
 
-Schéma de câblage éditable et licence de réutilisation : à définir avant une diffusion présentée comme projet reproductible complet.
+Le schéma de câblage éditable reste à ajouter avant de présenter le projet comme entièrement reproductible.
+
+## Licence
+
+Code et documentation : **GNU GPLv3**, comme le projet Fibre → 4G. Copyright © 2026 Serge HAAS. Voir [LICENSE](LICENSE).
