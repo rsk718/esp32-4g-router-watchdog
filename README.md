@@ -60,7 +60,7 @@ Le watchdog commande **l'alimentation du routeur**, pas le trafic réseau 4G.
 
 **Intérieur de la façade :** LCD parallèle 16×2, plaque à pastilles et raccordements des commandes.
 
-![Intérieur de la façade avec LCD parallèle](images/watchDog4G-interieur-facadel.jpg)
+![Intérieur de la façade avec LCD parallèle](images/watchDog4G-interieur-facadel.jpg?version=20261025)
 
 > **Sécurité électrique :** ce boîtier est un prototype personnel intégrant du **230 V secteur**. Ces photos documentent un montage existant ; elles ne constituent ni un schéma de câblage certifié ni des instructions de reproduction. Toute intervention exige une mise hors tension, une vérification d'absence de tension et des protections électriques adaptées.
 
