@@ -48,6 +48,22 @@ Le watchdog commande **l'alimentation du routeur**, pas le trafic réseau 4G.
 
 [Boîtier installé](images/watchdog-installed-wide.jpeg) · [Routeur 4G](images/router-4g.jpeg) · [État Web](images/web-status.jpeg) · [Historique Web](images/web-history.png)
 
+### Vue intérieure du montage V2.2
+
+**Vue générale :** implantation du module ESP32, de la carte relais/alimentation et du câblage dans le boîtier.
+
+![Vue générale de l'intérieur du watchdog 4G](images/watchDog4G-interieur-general.jpg)
+
+**ESP32 et relais :** vue rapprochée de l'électronique de commande.
+
+![Détail de l'ESP32 et de la carte relais](images/watchDog4G-interieur-esp32relaisl.jpg)
+
+**Intérieur de la façade :** LCD parallèle 16×2, plaque à pastilles et raccordements des commandes.
+
+![Intérieur de la façade avec LCD parallèle](images/watchDog4G-interieur-facadel.jpg)
+
+> **Sécurité électrique :** ce boîtier est un prototype personnel intégrant du **230 V secteur**. Ces photos documentent un montage existant ; elles ne constituent ni un schéma de câblage certifié ni des instructions de reproduction. Toute intervention exige une mise hors tension, une vérification d'absence de tension et des protections électriques adaptées.
+
 Ces captures illustrent l'installation. La validation de la temporisation SAFE OFF de la V2.2 est documentée ci-dessous ; la V2.3 I²C reste à tester.
 
 ## Ouvrir un sketch
