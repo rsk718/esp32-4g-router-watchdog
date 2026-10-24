@@ -6,17 +6,17 @@ Un ESP32 surveille l'accès Internet d'un routeur 4G et peut redémarrer son ali
 
 <img src="images/watchdog-installed-front.jpeg" alt="Boîtier du watchdog installé à Saint-Clément" width="340">
 
-**Attention aux versions :** le fichier nommé `WatchdogRouteur4GV3.ino` est *probablement* celui installé ; cette identification reste à confirmer sur l'ESP32. Les variantes SAFE OFF et I²C ci-dessous **n'ont pas encore été testées à Saint-Clément**. Les photos montrent le montage en service, pas ces nouvelles variantes.
+**Version actuellement installée et validée :** `WatchdogRouteur4G_V2_2_SAFE_OFF.ino`, testée à Saint-Clément-sur-Durance le **24 octobre 2026** sur ESP32 Dev Module avec LCD 16×2 parallèle. La variante I²C V2.3 reste **non testée**. Les photos existantes peuvent représenter des états antérieurs de l'installation.
 
 ## Trois firmwares distincts
 
 | Fichier | LCD | OFF depuis le Web | État |
 | --- | --- | --- | --- |
-| [`WatchdogRouteur4GV3.ino`](firmware/WatchdogRouteur4GV3/WatchdogRouteur4GV3.ino) | Parallèle, 6 fils de commande | Pas de minuterie dédiée : la surveillance Internet ou un redémarrage de l'ESP32 peuvent le réalimenter ; durée non garantie | Probablement installé ; identification exacte à confirmer |
-| [`WatchdogRouteur4G_V2_2_SAFE_OFF.ino`](firmware/WatchdogRouteur4G_V2_2_SAFE_OFF/WatchdogRouteur4G_V2_2_SAFE_OFF.ino) | Parallèle, mêmes broches | Remise sous tension automatique après 5 min | Non testé sur site |
+| [`WatchdogRouteur4GV3.ino`](firmware/WatchdogRouteur4GV3/WatchdogRouteur4GV3.ino) | Parallèle, 6 fils de commande | Pas de minuterie dédiée : la surveillance Internet ou un redémarrage de l'ESP32 peuvent le réalimenter ; durée non garantie | Ancienne version conservée pour historique |
+| [`WatchdogRouteur4G_V2_2_SAFE_OFF.ino`](firmware/WatchdogRouteur4G_V2_2_SAFE_OFF/WatchdogRouteur4G_V2_2_SAFE_OFF.ino) | Parallèle, mêmes broches | Remise sous tension automatique après 5 min | **Stable — installée et validée le 24/10/2026** |
 | [`WatchdogRouteur4G_V2_3_I2C_LCD_SAFE_OFF.ino`](firmware/WatchdogRouteur4G_V2_3_I2C_LCD_SAFE_OFF/WatchdogRouteur4G_V2_3_I2C_LCD_SAFE_OFF.ino) | I²C, SDA 21 / SCL 22 | Remise sous tension automatique après 5 min | Non testé sur site |
 
-Le nom « V3 » est celui du fichier reçu ; son commentaire d'en-tête indique « V2 fiabilisée ». Les trois sources sont conservées **sans modification**. Il n'y a pas de version GitHub marquée comme nouvelle version stable tant que l'installation et les essais ne sont pas confirmés.
+Le nom « V3 » est celui du fichier reçu ; son commentaire d'en-tête indique « V2 fiabilisée ». Les trois sources sont conservées **sans modification**. **La V2.2 SAFE OFF est la version de référence validée sur l'installation actuelle** ; la V2.3 I²C est une évolution matérielle non encore testée.
 
 ## Fonctionnement commun
 
@@ -48,7 +48,7 @@ Le watchdog commande **l'alimentation du routeur**, pas le trafic réseau 4G.
 
 [Boîtier installé](images/watchdog-installed-wide.jpeg) · [Routeur 4G](images/router-4g.jpeg) · [État Web](images/web-status.jpeg) · [Historique Web](images/web-history.png)
 
-Ces captures illustrent le fonctionnement de l'installation existante. Elles ne valident pas le retour automatique après cinq minutes des deux variantes SAFE OFF.
+Ces captures illustrent l'installation. La validation de la temporisation SAFE OFF de la V2.2 est documentée ci-dessous ; la V2.3 I²C reste à tester.
 
 ## Ouvrir un sketch
 
@@ -56,13 +56,21 @@ Chaque `.ino` est placé dans un dossier de même nom pour l'ouvrir dans l'IDE A
 
 Au premier démarrage sans identifiants enregistrés, l'ESP32 crée le point d'accès `ESP32_Config`. **Changer son mot de passe par défaut défini dans chaque sketch avant une nouvelle installation.** Les commandes de l'interface Web fournie n'ont pas d'authentification ; réserver son accès au réseau local ou à un accès privé maîtrisé.
 
-## Essais à réaliser avant de remplacer le firmware installé
+## Validation sur site — V2.2 SAFE OFF (24 octobre 2026)
 
-1. Identifier la version exacte présente sur le boîtier et sauvegarder son binaire ou son source si possible.
-2. Vérifier la remise sous tension du routeur au démarrage de l'ESP32.
-3. Sur V2.2 et V2.3, demander « 4G OFF » depuis le Web et confirmer le retour d'alimentation après cinq minutes, même si l'interface devient inaccessible pendant la coupure.
-4. Sur V2.3, confirmer l'adresse I²C, le câblage et l'extinction/réveil du rétroéclairage après trois minutes.
-5. Tester le redémarrage après panne Internet, le compteur quotidien et les journaux.
+- Matériel : **ESP32 Dev Module**, LCD 16×2 **parallèle** ; interface Web accessible sur le réseau local.
+- **13:08:29** — Connexion Wi-Fi après flash ; **13:10:27** — Internet redevenu OK (stable), d'après les journaux.
+- **20:10:59** — Commande « 4G OFF » depuis l'interface Web, avec remise ON programmée à cinq minutes.
+- **20:15:59** — Journal : « SÉCURITÉ : remise ON automatique après 5 min de OFF Web ».
+- Après la coupure, le routeur a redémarré et l'accès Internet a été retrouvé ; compteur de reboots affiché **0/48**, sans redémarrage automatique intempestif constaté durant cet essai.
+
+**Conclusion : V2.2 SAFE OFF validée en conditions réelles pour la coupure Web temporisée et le rétablissement de l'accès.** Cette validation ne remplace pas un test exhaustif de toutes les situations de panne.
+
+## Essais restant à réaliser
+
+1. Sur la **V2.3 I²C**, confirmer le câblage, l'adresse I²C, l'affichage et l'extinction/réveil du rétroéclairage après trois minutes.
+2. Sur les versions futures, revalider le comportement du relais au démarrage et le retour automatique après une coupure Web.
+3. Compléter les essais de panne Internet prolongée, du limiteur quotidien et des journaux sur la version publiée.
 
 Le schéma de câblage éditable reste à ajouter avant de présenter le projet comme entièrement reproductible.
 
