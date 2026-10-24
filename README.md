@@ -1,12 +1,12 @@
 # Watchdog routeur 4G — ESP32
 
-Un ESP32 surveille l'accès Internet d'un routeur 4G et peut redémarrer son alimentation par relais après une panne confirmée. Le boîtier installé à Saint-Clément-sur-Durance dispose d'un LCD 16×2, de boutons, d'une LED et d'une interface Web locale.
+Un ESP32 surveille l'accès Internet d'un routeur 4G et peut redémarrer son alimentation par relais après une panne confirmée. Le boîtier installé à Hautes-Alpes, France dispose d'un LCD 16×2, de boutons, d'une LED et d'une interface Web locale.
 
 *ESP32 watchdog for a 4G router, with Internet checks, relay power cycling, LCD status and a local web interface.*
 
 <img src="images/watchdog-installed-front.jpeg" alt="Boîtier du watchdog installé à Saint-Clément" width="340">
 
-**Version actuellement installée et validée :** `WatchdogRouteur4G_V2_2_SAFE_OFF.ino`, testée à Saint-Clément-sur-Durance le **24 octobre 2026** sur ESP32 Dev Module avec LCD 16×2 parallèle. La variante I²C V2.3 reste **non testée**. Les photos existantes peuvent représenter des états antérieurs de l'installation.
+**Version actuellement installée et validée :** `WatchdogRouteur4G_V2_2_SAFE_OFF.ino`, testée à Hautes-Alpes, France le **24 octobre 2026** sur ESP32 Dev Module avec LCD 16×2 parallèle. La variante I²C V2.3 reste **non testée**. Les photos existantes peuvent représenter des états antérieurs de l'installation.
 
 ## Trois firmwares distincts
 
@@ -92,4 +92,4 @@ Le schéma de câblage éditable reste à ajouter avant de présenter le projet 
 
 ## Licence
 
-Code et documentation : **GNU GPLv3**, comme le projet Fibre → 4G. Copyright © 2026 Serge HAAS. Voir [LICENSE](LICENSE).
+Code et documentation : **GNU GPLv3**, comme le projet Fibre → 4G. Copyright © 2026 rsk718. Voir [LICENSE](LICENSE).
